@@ -1,0 +1,293 @@
+h1, h2, p, label{
+  color: var(--gray-100)
+}
+
+.containerlist {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+
+  position: absolute;
+  width: 736px;
+  height: 287px;
+  top: 250px;
+  left: calc(50% - 736px/2);
+}
+
+.infolist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0px;
+
+  width: 721px;
+  height: 19px;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+
+  .criados {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+
+    width: 139px;
+    height: 19px;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    
+    .tarefacriada {
+      width: 106px;
+      height: 17px;
+      
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 17px;
+  
+      color: var(--blue);
+  
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    
+  }
+
+  .finalizados {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+
+    width: 111px;
+    height: 19px;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    .tarefacompleta {
+      width: 79px;
+      height: 17px;
+
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 17px;
+
+      color: var(--purple);
+
+      
+
+    }
+  }
+  
+
+  .contador {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 8px;
+    gap: 10px;
+
+    width: 25px;
+    height: 19px;
+
+    color: var(--gray-100);
+    background: var(--gray-400);
+    border-radius: 999px;
+
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 15px;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+
+  .contadorComplete {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 8px;
+    gap: 10px;
+
+    width: 52px;
+    height: 19px;
+
+    color: var(--gray-100);
+    background: var(--gray-400);
+    border-radius: 999px;
+
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 15px;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+}
+
+.areavoid {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 64px 24px;
+  gap: 16px;
+
+  width: 736px;
+  height: 244px;
+
+  border-top: 1px solid var(--gray-400);
+  border-radius: 8px;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+
+  .clipimg {
+    width: 56px;
+    height: 56px;
+  
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+
+  .textareavoid {
+    width: 688px;
+    height: 44px;
+
+    
+  
+    font-size: 16px;
+    line-height: 140%;
+
+    text-align: center;
+
+    color: var(--gray-300);
+
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+  }
+}
+
+.listatarefas {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+
+  width: 736px;
+  height: 408px;
+
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  
+  .tarefa {
+    box-sizing: border-box;
+  
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px;
+    padding-left: 60px;
+    gap: 14px;
+  
+    width: 736px;
+    height: 72px;
+    
+    background: var(--gray-500);
+
+    label {
+      width: 605px;
+      height: 30px;
+    }
+    
+    border: 1px solid var(--gray-400);
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+    
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    
+    .lixeiraimg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+}
+
+label::after {
+  content: "";
+
+  // border: 2px solid var(--blue);
+  // border-radius: 50%;
+
+  background: url("/src/assets/uncheck.svg");
+  background-position: center;
+  background-size: contain;
+
+  width: 35px;
+  height: 32px;
+
+  position: absolute;
+  left: 17px;
+  top: 17px;
+}
+
+input[type=checkBox] {
+  display: none;
+}
+
+input[type=checkBox]:checked + label::before {
+  transform: scale(1) rotateZ(0deg);
+}
+
+label::before {
+  content: "";
+  
+  background: url("/src/assets/check.svg");
+  background-position: center;
+  background-size: contain;
+
+  width: 32px;
+  height: 32px;
+
+  position: absolute;
+  left: 18px;
+  top: 17px;
+
+  label {
+    text-decoration-line: line-through;
+    color: var(--gray-300);
+  }
+  
+  transform: scale(0) rotateZ(180deg);
+  transition: all 0.4s cubic-bezier(0.54, 0.01, 0, 1.49);
+}
+
+
