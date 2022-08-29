@@ -1,20 +1,13 @@
 import Lixeira from '../assets/trash.svg'
 
-export function Task({ content, onSetTarefas, onSetComplete, onSomandoComplete }) {
+export function Task({ content, onSetTarefas, onCompleteTask, onSomandoComplete }) {
+
   function handleDeleteTask() {
     onSetTarefas(content);
   }
 
   function handleToggleComplete() {
-    if ((prev) => !prev) {
-      onSetComplete = false
-    }
-    if ((prev) => !prev) {
-      onSetComplete = true
-    }
-    console.log(onSetComplete);
-    return onSetComplete;
-   
+    onCompleteTask(content)
   }
 
   return (

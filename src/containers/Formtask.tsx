@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 
 import { Task } from "./Task";
 
@@ -8,25 +8,43 @@ import PlusSvg from "../assets/plus.svg";
 
 import "../scss/import.scss";
 
+const actions = {
+  complete: 'complete',
+};
+
+function reducer(complete, action) {
+  switch (action.type) {
+    case actions.complete:
+      return[...complete, newTask(action.payload.newTaskText)]
+  }
+}
+
+function newTask(newTaskText) {
+  return { id: Date.now(), newTaskText: newTaskText, complete: false }
+}
+
 export function Formtask() {
   const [tarefas, setTarefas] = useState([]);
 
   const [newTaskText, setNewTaskText] = useState("");
 
-  const [verificadorComplete, setVerificadorComplete] = useState(false);
+  const [complete, dispatch] = useReducer(reducer, []);
 
   const [somadorComplete, setSomadorComplete] = useState(0);
 
-  function handleCreateNewTask() {
-    event?.preventDefault();
+  function handleCreateNewTask(e) {
+    e?.preventDefault();
 
     setTarefas([...tarefas, newTaskText]);
+    dispatch({ type: actions.complete, payload: { newTaskText: newTaskText } })
 
     setNewTaskText('');
   }
 
-  function handleNewTaskChange() {
-    setNewTaskText(event?.target.value);
+  console.log(complete)
+
+  function handleNewTaskChange(e) {
+    setNewTaskText(e?.target.value);
   }
 
   function somandoComplete() {
@@ -93,7 +111,7 @@ export function Formtask() {
                   key={tarefa}
                   content={tarefa}
                   onSetTarefas={deleteTask}
-                  onSetComplete={setVerificadorComplete}
+                  onCompleteTask={dispatch}
                   onSomando={somandoComplete}
                 />
               );
