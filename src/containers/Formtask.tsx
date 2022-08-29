@@ -8,14 +8,31 @@ import PlusSvg from "../assets/plus.svg";
 
 import "../scss/import.scss";
 
-const actions = {
+export const actions = {
+  newtask:  'newtask',
   complete: 'complete',
 };
 
-function reducer(complete, action) {
+const inicial = {
+  listtarefas: [],
+  completos: 0,
+}
+
+function reducer(state, action) {
+  const newState = {...state};
   switch (action.type) {
+    case actions.newtask:
+      newState.listtarefas = [...newState.listtarefas, newTask(action.payload.newTaskText)]
+      return newState;
     case actions.complete:
-      return[...complete, newTask(action.payload.newTaskText)]
+      newState.listtarefas = newState.listtarefas.map(tarefa => {
+        if (tarefa.id === action.payload.id) {
+          return { ...tarefa, complete: !tarefa.complete}
+        }
+        return tarefa
+      })
+      newState.completos += 1;
+      return newState;
   }
 }
 
@@ -24,24 +41,20 @@ function newTask(newTaskText) {
 }
 
 export function Formtask() {
-  const [tarefas, setTarefas] = useState([]);
+  const [tarefas, dispatch] = useReducer(reducer, inicial);
 
   const [newTaskText, setNewTaskText] = useState("");
-
-  const [complete, dispatch] = useReducer(reducer, []);
 
   const [somadorComplete, setSomadorComplete] = useState(0);
 
   function handleCreateNewTask(e) {
     e?.preventDefault();
 
-    setTarefas([...tarefas, newTaskText]);
-    dispatch({ type: actions.complete, payload: { newTaskText: newTaskText } })
+    // setTarefas([...tarefas, newTaskText]);
+    dispatch({ type: actions.newtask, payload: { newTaskText: newTaskText } })
 
     setNewTaskText('');
   }
-
-  console.log(complete)
 
   function handleNewTaskChange(e) {
     setNewTaskText(e?.target.value);
@@ -61,7 +74,7 @@ export function Formtask() {
       return tarefa !== taskToDelete;
     });
 
-    setTarefas(taskWithoutDeleteOne);
+    dispatch(taskWithoutDeleteOne);
   }
 
   return (
@@ -84,15 +97,15 @@ export function Formtask() {
         <div className="infolist">
           <div className="criados">
             <p className="tarefacriada">Tarefas criadas</p>
-            <a className="contador">{tarefas.length}</a>
+            <a className="contador">{tarefas.listtarefas.length}</a>
           </div>
 
           <div className="finalizados">
             <p className="tarefacompleta">Concluídas</p>
-            <a className="contadorComplete">{somadorComplete} de {tarefas.length}</a>
+            <a className="contadorComplete">{tarefas.completos} de {tarefas.listtarefas.length}</a>
           </div>
         </div>
-        {tarefas.length === 0 && (
+        {tarefas?.length === 0 && (
           <div className="areavoid">
             <img className="clipimg" src={ImgClipBoard} />
 
@@ -105,10 +118,10 @@ export function Formtask() {
         )}{" "}
         {tarefas && (
           <div className="listatarefas">
-            {tarefas.map((tarefa) => {
+            {tarefas.listtarefas.map(tarefa => {
               return (
                 <Task 
-                  key={tarefa}
+                  key={tarefa.id}
                   content={tarefa}
                   onSetTarefas={deleteTask}
                   onCompleteTask={dispatch}
