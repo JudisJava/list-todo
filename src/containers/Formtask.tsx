@@ -29,10 +29,13 @@ function reducer(state, action) {
         if (tarefa.id === action.payload.id) {
           return { ...tarefa, complete: !tarefa.complete}
         }
-        return tarefa
+        return tarefa;
       })
-      newState.completos += 1;
+      newState.completos += 1;  
       return newState;
+
+    default:
+      return newState
   }
 }
 
@@ -45,12 +48,9 @@ export function Formtask() {
 
   const [newTaskText, setNewTaskText] = useState("");
 
-  const [somadorComplete, setSomadorComplete] = useState(0);
-
   function handleCreateNewTask(e) {
     e?.preventDefault();
 
-    // setTarefas([...tarefas, newTaskText]);
     dispatch({ type: actions.newtask, payload: { newTaskText: newTaskText } })
 
     setNewTaskText('');
@@ -58,15 +58,6 @@ export function Formtask() {
 
   function handleNewTaskChange(e) {
     setNewTaskText(e?.target.value);
-  }
-
-  function somandoComplete() {
-    if ((prev) => !prev) {
-      setSomadorComplete(somadorComplete + 1);
-    }
-    if ((prev) => !prev) {
-      setSomadorComplete(somadorComplete - 1);
-    }
   }
 
   function deleteTask(taskToDelete) {
@@ -125,7 +116,6 @@ export function Formtask() {
                   content={tarefa}
                   onSetTarefas={deleteTask}
                   onCompleteTask={dispatch}
-                  onSomando={somandoComplete}
                 />
               );
             })}

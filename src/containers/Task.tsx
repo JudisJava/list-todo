@@ -1,7 +1,7 @@
 import Lixeira from '../assets/trash.svg'
 import { actions } from './Formtask';
 
-export function Task({ content, onSetTarefas, onCompleteTask, onSomandoComplete }) {
+export function Task({ content, onSetTarefas, onCompleteTask}) {
 
   function handleDeleteTask() {
     onSetTarefas(content);
