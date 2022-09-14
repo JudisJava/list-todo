@@ -15,7 +15,6 @@ export const actions = {
 
 const inicial = {
   listtarefas: [],
-  completos: 0,
 }
 
 function reducer(state, action) {
@@ -27,15 +26,15 @@ function reducer(state, action) {
     case actions.complete:
       newState.listtarefas = newState.listtarefas.map(tarefa => {
         if (tarefa.id === action.payload.id) {
-          return { ...tarefa, complete: !tarefa.complete}
+          return { ...tarefa, complete: !tarefa.complete }
         }
         return tarefa;
       })
-      newState.completos += 1;  
+
       return newState;
 
     default:
-      return newState
+      return newState;
   }
 }
 
@@ -55,6 +54,13 @@ export function Formtask() {
 
     setNewTaskText('');
   }
+
+  // function filterTask(tarefas) {
+  //   const tarefasFiltradas = tarefas.listtarefas.filter((tarefa) => {
+  //     return 
+  //   })
+
+  // }
 
   function handleNewTaskChange(e) {
     setNewTaskText(e?.target.value);
@@ -93,7 +99,7 @@ export function Formtask() {
 
           <div className="finalizados">
             <p className="tarefacompleta">Concluídas</p>
-            <a className="contadorComplete">{tarefas.completos} de {tarefas.listtarefas.length}</a>
+            <a className="contadorComplete">{tarefas.listtarefas.filter((tarefa) => tarefa.complete).length} de {tarefas.listtarefas.length}</a>
           </div>
         </div>
         {tarefas?.length === 0 && (
@@ -121,6 +127,7 @@ export function Formtask() {
             })}
           </div>
         )}
+        <pre>{JSON.stringify(tarefas, null, 2)}</pre>
       </div>
     </>
   );

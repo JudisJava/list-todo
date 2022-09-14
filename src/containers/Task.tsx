@@ -8,14 +8,15 @@ export function Task({ content, onSetTarefas, onCompleteTask}) {
   }
 
   function handleToggleComplete() {
-    onCompleteTask({ type: actions?.complete, payload: {id: content.id }})
+    onCompleteTask({ type: actions.complete, payload: {id: content.id }})
   }
 
   return (
     <>
+    
         <div className='tarefa' onClick={handleToggleComplete}>
-          <input type='checkBox' id={content.id} className='checkbox'/>
-          <label for={content.id}>
+        <input type='checkBox' id={content.id} className='checkbox'/>
+          <label onClick={handleToggleComplete} for={content.id}>
             {content.newTaskText}
           </label>
           <img onClick={handleDeleteTask} className='lixeiraimg' src={Lixeira}/>
