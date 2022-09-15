@@ -17,7 +17,7 @@ const inicial = {
   listtarefas: [],
 }
 
-function reducer(state, action) {
+function reducer(state, action: any) {
   const newState = {...state};
   switch (action.type) {
     case actions.newtask:
@@ -54,13 +54,6 @@ export function Formtask() {
 
     setNewTaskText('');
   }
-
-  // function filterTask(tarefas) {
-  //   const tarefasFiltradas = tarefas.listtarefas.filter((tarefa) => {
-  //     return 
-  //   })
-
-  // }
 
   function handleNewTaskChange(e) {
     setNewTaskText(e?.target.value);
@@ -127,7 +120,6 @@ export function Formtask() {
             })}
           </div>
         )}
-        <pre>{JSON.stringify(tarefas, null, 2)}</pre>
       </div>
     </>
   );

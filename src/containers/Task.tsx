@@ -13,9 +13,8 @@ export function Task({ content, onSetTarefas, onCompleteTask}) {
 
   return (
     <>
-    
         <div className='tarefa' onClick={handleToggleComplete}>
-        <input type='checkBox' id={content.id} className='checkbox'/>
+          <input type='checkBox' id={content.id} className='checkbox'/>
           <label onClick={handleToggleComplete} for={content.id}>
             {content.newTaskText}
           </label>
